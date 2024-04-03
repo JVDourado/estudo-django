@@ -1,7 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+class Category(models.Model):
+    name = models.CharField(max_length=65)
 
-class Recipe(models.model):
+    def __str__(self):
+        return self.name
+
+class Recipe(models.Model):
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
     slug = models.SlugField()
@@ -15,4 +21,12 @@ class Recipe(models.model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='recipes/cover/%Y/%m/%d/')
-    
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True
+    )
+    author= models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True
+    )
+
+    def __str__(self):
+        return self.title
