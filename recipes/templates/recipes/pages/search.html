@@ -1,6 +1,6 @@
 {% extends 'global/base.html'%}
 
-{% block title %}Home{% endblock title %}
+{% block title %}{{title}}{% endblock title %}
 
 {% block content %}
 
@@ -9,7 +9,8 @@
         {% include 'recipes/partials/recipe.html' %}
     {% empty %}
         <div class="center">
-            <h1>No recipes available 😭</h1>
+            <h1>Your searched for "{{ search_term }}",</br> 
+                but no recipe was found 😭</h1>
         </div>
     {% endfor %}
 </div>
