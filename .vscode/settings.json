@@ -1,7 +1,20 @@
 {
     "python.testing.pytestArgs": [
-        "."
+        "recipes",
+        "authors",
+        "utils",
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "emmet.includeLanguages": {
+        "django-html": "html",
+        "python": "html"
+    },
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "*test.py"
+    ]
 }

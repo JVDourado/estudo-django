@@ -1,10 +1,8 @@
 from django.http import Http404
 from django.db.models import Q
 from utils.pagination import make_pagination
-from utils.recipes.factory import make_recipe
 from recipes.models import Recipe, Category
 from django.shortcuts import get_list_or_404, render
-from django.core.paginator import Paginator
 # Create your views here.
 
 def home(request):
@@ -12,7 +10,7 @@ def home(request):
         is_published = True
     ).order_by('-id')
 
-    page_obj, pagination_range = make_pagination(request, recipes, 3)
+    page_obj, pagination_range = make_pagination(request, recipes, 12)
 
     return render(request, 'recipes/pages/home.html', context={
         'recipes': page_obj,
@@ -27,7 +25,7 @@ def category(request, category_id):
         ).order_by('-id')
     )
 
-    page_obj, pagination_range = make_pagination(request, recipes, 3)
+    page_obj, pagination_range = make_pagination(request, recipes, 6)
 
     return render(request, 'recipes/pages/category.html', context={
         'recipes': page_obj,
@@ -56,7 +54,7 @@ def search(request):
         is_published = True,
     )
 
-    page_obj, pagination_range = make_pagination(request, recipes, 3)
+    page_obj, pagination_range = make_pagination(request, recipes, 6)
     
     return render(request, 'recipes/pages/search.html',{
         'title': f'search for "{search_term}"',
